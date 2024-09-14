@@ -1,40 +1,28 @@
-class Punto {
-    protected x: number;
-    protected y: number;
+
+export class Punto {
+    protected a1: number;
+    protected a2: number;
+    protected b1: number;
+    protected b2: number;
  
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
+    constructor(a1: number, a2: number, b1: number, b2: number) {
+        this.a1 = a1;
+        this.a2 = a2;
+        this.b1 = b1;
+        this.b2 = b2;
     }
- 
-    imprimir(): void {
-        console.log(`Punto: (${this.x}, ${this.y})`);
-    }
-}
- 
-class Distancia extends Punto {
-    private x2: number;
-    private y2: number;
- 
-    constructor(x: number, y: number, x2: number, y2: number) {
-        super(x, y);
-        this.x2 = x2;
-        this.y2 = y2;
-    }
- 
+    
+
+
     calcularDistancia(): void {
-        const distancia = Math.sqrt(Math.pow(this.x2 - this.x, 2) + Math.pow(this.y2 - this.y, 2));
-        console.log(`La distancia entre los puntos (${this.x}, ${this.y}) y (${this.x2}, ${this.y2}) es: ${distancia}`);
+        const distanciaA = Math.sqrt(Math.pow(this.b1 - this.a1, 2) + Math.pow(this.b2 - this.a2, 2));
+        console.log(`La distancia entre los puntos (A) y (B)`);
+        console.log(` es: ${distanciaA}`);
     }
- 
-    imprimir(): void {
-        console.log(`Punto 1: (${this.x}, ${this.y}) Punto 2: (${this.x2}, ${this.y2})`);
-    }
+    
+   
 }
+
  
-const punto1 = new Punto(3, 4);
-punto1.imprimir();
- 
-const distancia1 = new Distancia(3, 4, 7, 1);
-distancia1.imprimir();
+const distancia1 = new Punto(5, 2, 6, 4);
 distancia1.calcularDistancia();

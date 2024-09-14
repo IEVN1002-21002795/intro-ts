@@ -1,42 +1,65 @@
-// DistanciaEntre2puntos.ts
-export class Punto {
-    protected x: number;
-    protected y: number;
+import {Punto} from "./05-distancia-entre-dos-puntos";
+
+export class Puntos {
+    
+    protected c1: number;
+    protected c2: number;
  
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
+    constructor(c1: number, c2: number) {
+        this.c1 = c1;
+        this.c2 = c2;
     }
  
-    imprimir(): void {
-        console.log(`Punto: (${this.x}, ${this.y})`);
-    }
+   
 }
  
-export class Distancia extends Punto {
-    protected x2: number;
-    protected y2: number;
+export class Distancia extends Puntos {
  
-    constructor(x: number, y: number, x2: number, y2: number) {
-        super(x, y);
-        this.x2 = x2;
-        this.y2 = y2;
+    constructor(a1: number, a2: number, b1: number, b2: number, c1: number, c2: number) {
+        super(a1, a2);
+        super(b1, b2);
+        
+        this.c1 = c1;
+        this.c2 = c2;
     }
  
     calcularDistancia(): void {
-        const distancia = Math.sqrt(Math.pow(this.x2 - this.x, 2) + Math.pow(this.y2 - this.y, 2));
-        console.log(`La distancia entre los puntos (${this.x}, ${this.y}) y (${this.x2}, ${this.y2}) es: ${distancia}`);
+        const distanciaA = Math.sqrt(Math.pow(this.b1 - this.a1, 2) + Math.pow(this.b2 - this.a2, 2));
+
+        const distanciaB = Math.sqrt(Math.pow(this.b1 - this.c1, 2) + Math.pow(this.b2 - this.c2, 2));
+
+        const distanciaC = Math.sqrt(Math.pow(this.c1 - this.a1, 2) + Math.pow(this.c2 - this.a2, 2));
+
+        console.log(`La distancia entre los puntos (A) y (B) es: ${distanciaA}`);
+
+        console.log(`La distancia entre los puntos (B) y (C) es: ${distanciaB}`);
+
+        console.log(`La distancia entre los puntos (C) y (A) es: ${distanciaC}`);
     }
  
-    imprimir(): void {
-        console.log(`Punto 1: (${this.x}, ${this.y}) Punto 2: (${this.x2}, ${this.y2})`);
+    calcularTriangulo(): boolean {
+
+        const determinante = (this.a1 * (this.b2 - this.c2)) + 
+                             (this.b1 * (this.c2 - this.a2)) + 
+                             (this.c1 * (this.a2 - this.b2));
+    
+        return determinante !== 0;
+    }
+
+    imprimirTriangulo(): void{
+        if (this.calcularTriangulo()) {
+            console.log("Los puntos forman un triángulo.");
+        } else {
+            console.log("Los puntos no forman un triángulo.");
+        }
     }
 }
+
+
+
  
-// Prueba de las clases
-const punto1 = new Punto(3, 4);
-punto1.imprimir();
- 
-const distancia1 = new Distancia(3, 4, 7, 1);
-distancia1.imprimir();
+const distancia1 = new Distancia(3, 4, 7, 1, 7, 1);
+
 distancia1.calcularDistancia();
+distancia1.calcularTriangulo();
+distancia1.imprimirTriangulo();
